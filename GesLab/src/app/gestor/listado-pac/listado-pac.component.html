@@ -1,0 +1,23 @@
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+        <th scope="col">Codigo</th>
+        <th scope="col">Nombres</th>
+        <th scope="col">Apellido Paterno</th>
+        <th scope="col">Apellido Materno</th>
+        <th scope="col">Edad</th>
+        </tr>
+    </thead>
+    <tbody style="cursor: pointer;">
+        <tr *ngFor="let patient of patients" routerLink="/gestor/registro_pacientes">
+            <td>{{patient.id}}</td>
+            <td>{{patient.name}}</td>
+            <td>{{patient.fat_lastname}}</td>
+            <td>{{patient.mat_lastname}}</td>
+            <td>{{patient.age}}</td>
+        </tr>
+    </tbody>
+</table>
+<div class="container">
+    <button (click)=nextPage()>Proxima pagina</button>
+</div>

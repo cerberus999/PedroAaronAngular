@@ -1,0 +1,158 @@
+<div class="container">
+  <h3 class="Title">Registro de Pacientes</h3>
+</div>
+
+<div class="container">
+  <form [formGroup]=patientReg (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col">
+        <label for="name">Nombres*:</label>
+        <div class="input-group mb-3">
+          <input type="text" 
+          formControlName="name"
+          class="form-control"
+          [ngClass]="{'is-invalid': (f.name.touched) && f.name.errors}">
+          <div *ngIf="(submitted || f.name.touched) && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors.required">Nombres requeridos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="fat_lastname">Apellido paterno(*):</label>
+        <div class="input-group mb-3">
+          <input type="text" 
+          formControlName="fat_lastname"
+          class="form-control"
+          [ngClass]="{'is-invalid': (f.fat_lastname.touched || f.mat_lastname.touched) && (f.fat_lastname.invalid && f.mat_lastname.invalid)}">
+          <div *ngIf="(f.fat_lastname.value == '' && f.mat_lastname.value == '')" class="invalid-feedback">
+            <div *ngIf="f.fat_lastname.errors?.required">
+              Se debe registrar al menos un apellido
+            </div>
+          </div>
+          <div>{{f.fat_lastname.valid}}</div>
+          <div>{{f.fat_lastname.errors}}</div>
+        </div>
+      </div>
+      <div class="col">
+        <label for="mat_lastname">Apellido materno(*):</label>
+        <div class="input-group mb-3">
+          <input type="text" 
+          formControlName="mat_lastname"
+          class="form-control"
+          [ngClass]="{'is-invalid': (f.fat_lastname.touched || f.mat_lastname.touched) && (f.mat_lastname.invalid && f.fat_lastname.invalid)}">
+          <div *ngIf="(f.mat_lastname.value == '' && f.fat_lastname.value == '')" class="invalid-feedback">
+            <div *ngIf="f.mat_lastname.errors?.required">
+              Se debe registrar al menos un apellido
+            </div>
+          </div>
+          <div>{{f.mat_lastname.valid}}</div>
+          <div>{{f.mat_lastname.errors}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="dateBirth">Fecha de nacimiento(*):</label>
+        <div class="input-group mb-3">
+          <input type="date" 
+          formControlName="dateBirth"
+          [(ngModel)] = "fecha_nacimiento"
+          class="form-control"
+          [ngClass]="{'is-invalid': f.dateBirth.touched && f.dateBirth.errors}">
+          <div *ngIf=" (submitted || f.dateBirth.touched) && f.dateBirth.errors" class="invalid-feedback">
+            <div *ngIf="f.dateBirth.errors.required">
+              Fecha de nacimiento requerida
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <label for="age">Edad:</label>
+        <div class="input-group mb-3">
+          <input
+          style="background-color: white;"
+          type="text"
+          formControlName="age"
+          class="form-control"
+          value="{{calcularEdad()}}">
+        </div>
+      </div>
+      <div class="col">
+        <label for="sex">Sexo(*):</label>
+        <div class="input-group mb-3">
+          <select  
+          id="sex"
+          formControlName="sex"
+          class="form-control"
+          [ngClass]="{'is-invalid': (f.sex.touched) && f.sex.errors}">
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option> 
+          </select>
+          <div *ngIf=" (submitted || f.sex.touched) && f.sex.errors" class="invalid-feedback">
+            <div *ngIf="f.sex.errors.required">
+              Sexo del paciente requerido
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="Direccion">Direccion:</label>
+        <div class="input-group mb-3">
+          <input type="text" 
+          formControlName="direction"
+          class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="telefono">Telefono(*):</label>
+        <div class="input-group mb-3">
+          <input type="text"
+          formControlName="telephone"
+          class="form-control"
+          [ngClass]="{'is-invalid': (f.telephone.touched) && f.telephone.errors}">
+          <div *ngIf="(submitted || f.telephone.touched) && f.telephone.errors" class="invalid-feedback">
+            <div *ngIf="f.telephone.errors.required">
+              Telefono requerido
+            </div>
+          </div> 
+        </div>
+      </div>
+      <div class="col">
+        <label for="asegurado">Tipo de asegurado:</label>
+        <div class="input-group mb-3">
+          <select 
+          fromControlName="securedType"
+          class="form-control">
+            <option value="Ninguno">Ninguno</option>
+            <option value="Titular">Titular</option>
+            <option value="Beneficiario">Beneficiario</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="comentario">Comentario:</label>
+        <div class="input-group mb-3">
+          <textarea 
+            style="resize: none;"
+            class="form-control"
+            formControlName="comment"
+            name=""
+            cols="30" 
+            rows="4">
+          </textarea>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary" [disabled]="!patientReg.valid">Registrar</button>
+    </div>
+  </form>
+</div>

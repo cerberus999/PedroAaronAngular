@@ -1,0 +1,14 @@
+a {
+    text-decoration: none;
+    color: white;    
+}
+
+a:hover{
+    color: black;
+    font-size: 15px;
+}
+
+a:focus{
+    border: 1px dotted white;
+    color: black;
+}
